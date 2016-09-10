@@ -56,7 +56,7 @@ public:
 
     char* GetFileName();
 
-  
+    TrackCollection* GetTracks();  
     
 };
 

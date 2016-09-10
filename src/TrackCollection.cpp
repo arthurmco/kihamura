@@ -63,3 +63,20 @@ void TrackCollection::DeleteTrack(int index)
     
     _tracks.erase(it);
 }
+
+size_t TrackCollection::GetCount() { return _tracks.size(); }
+
+void TrackCollection::ResetIterator()
+{
+    _iterator = _tracks.begin();
+}
+
+Track* TrackCollection::GetNext() 
+{
+    if (_iterator == _tracks.end())
+        return nullptr;
+
+    Track* t = *_iterator;
+    _iterator++;
+    return t;
+}

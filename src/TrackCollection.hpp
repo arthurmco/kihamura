@@ -18,6 +18,8 @@ class TrackCollection {
 private:
     std::list<Track*> _tracks;
 
+    std::list<Track*>::iterator _iterator;
+
 public:
     /* Adds a track, return its index into the collection */
     int AddTrack(Track*);
@@ -34,6 +36,13 @@ public:
 
     /* Delete a track by its index */
     void DeleteTrack(int index);
+
+    /* Get track count */
+    size_t GetCount();
+
+    /* Controls the track iterator */
+    void ResetIterator();
+    Track* GetNext();
 };
 
 #endif

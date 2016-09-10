@@ -49,3 +49,6 @@ int VideoProject::GetBitrate(){ return _defAudioBitrate; }
 void VideoProject::SetBitrate(int brate) { _defAudioBitrate = brate; }
 
 char* VideoProject::GetFileName() { return _filename; }
+
+
+TrackCollection* VideoProject::GetTracks() { return _trackcol; }
