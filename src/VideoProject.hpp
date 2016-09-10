@@ -4,6 +4,8 @@
 
 */
 
+#include "TrackCollection.hpp"
+
 #ifndef _VIDEOPROJECT_HPP
 #define _VIDEOPROJECT_HPP
 
@@ -14,18 +16,22 @@ private:
     char* _name;
 
     /* The project default size */    
-    int _defaultWidth, _defaultHeight;
+    int _defWidth, _defHeight;
 
     /* Project default video framerate and audio bitrate in kbps */
-    float _defaultFramerate;
-    int _defaultAudioBitrate;
+    float _defFramerate;
+    int _defAudioBitrate;
 
     /* File name and descriptor */
     char* _filename;
     int _fd;
 
+    /* Track collection */
+    TrackCollection* _trackcol;
+
 public:
     VideoProject(char* name, int width, int height, float fps, int bitrate);
+    ~VideoProject();
 
     /* Open a project from a file */
     void Open(const char* filename);
@@ -49,6 +55,9 @@ public:
     void SetBitrate(int);
 
     char* GetFileName();
+
+  
+    
 };
 
 

@@ -4,10 +4,17 @@ VideoProject::VideoProject(char* name,
     int width, int height, float fps, int bitrate)
 {
     _name = name;
-    _defaultWidth = width;
-    _defaultHeight = height;
-    _defaultFramerate = fps;
-    _defaultAudioBitrate = bitrate;
+    _defWidth = width;
+    _defHeight = height;
+    _defFramerate = fps;
+    _defAudioBitrate = bitrate;
+
+    _trackcol = new TrackCollection;
+}
+
+VideoProject::~VideoProject()
+{
+    delete _trackcol;
 }
 
 /* Open a project from a file */
@@ -21,6 +28,7 @@ void VideoProject::Save()
 {
     this->Save(_filename);
 }
+
 void VideoProject::Save(const char* filename)
 {
 
@@ -29,15 +37,15 @@ void VideoProject::Save(const char* filename)
 char* VideoProject::GetName() { return _name; }
 void VideoProject::SetName(char* name) { _name = name; }
 
-int VideoProject::GetWidth() { return _defaultWidth; }
-int VideoProject::GetHeight() { return _defaultHeight; }
-void VideoProject::SetWidth(int w) { _defaultWidth = w; }
-void VideoProject::SetHeight(int h) {_defaultHeight = h; }
+int VideoProject::GetWidth() { return _defWidth; }
+int VideoProject::GetHeight() { return _defHeight; }
+void VideoProject::SetWidth(int w) { _defWidth = w; }
+void VideoProject::SetHeight(int h) {_defHeight = h; }
 
-float VideoProject::GetFPS() { return _defaultFramerate; }
-void VideoProject::SetFPS(float fps) { _defaultFramerate = fps; }
+float VideoProject::GetFPS() { return _defFramerate; }
+void VideoProject::SetFPS(float fps) { _defFramerate = fps; }
 
-int VideoProject::GetBitrate(){ return _defaultAudioBitrate; }
-void VideoProject::SetBitrate(int brate) { _defaultAudioBitrate = brate; }
+int VideoProject::GetBitrate(){ return _defAudioBitrate; }
+void VideoProject::SetBitrate(int brate) { _defAudioBitrate = brate; }
 
 char* VideoProject::GetFileName() { return _filename; }
