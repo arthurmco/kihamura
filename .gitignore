@@ -2,3 +2,5 @@
 *.swp
 kihamura
 
+autom4te_cache/
+
