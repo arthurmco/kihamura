@@ -5,6 +5,7 @@
 */
 
 #include "TrackCollection.hpp"
+#include "MediaCollection.hpp"
 
 #ifndef _VIDEOPROJECT_HPP
 #define _VIDEOPROJECT_HPP
@@ -28,6 +29,9 @@ private:
 
     /* Track collection */
     TrackCollection* _trackcol;
+
+    /* Project media collection */
+    MediaCollection* _mediacol;
 
 public:
     VideoProject(char* name, int width, int height, float fps, int bitrate);
@@ -57,7 +61,7 @@ public:
     char* GetFileName();
 
     TrackCollection* GetTracks();  
-    
+    MediaCollection* GetMedia(); 
 };
 
 

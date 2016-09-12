@@ -11,6 +11,11 @@
 #include "VideoProject.hpp"
 #include "VideoTrack.hpp"
 
+#include "MediaCollection.hpp"
+
+#include "media/FileMediaOpener.hpp"
+#include "media/AnyMedia.hpp"
+
 #define CMD_IS(line, cmd) \
     (!strcmp(line, cmd))
 
@@ -46,6 +51,7 @@ int main(int argc, char **argv)
             printf("Size: %dx%d, %.2f fps, %.3f kbps of bitrate\n", 
                 vp->GetWidth(), vp->GetHeight(), vp->GetFPS(), 
                 vp->GetBitrate() / 1000.0f);
+            printf("%d media objects in this project\n", vp->GetMedia()->GetCount());
         }
 
         if (CMD_IS(line, "exit")) {
@@ -179,7 +185,47 @@ int main(int argc, char **argv)
                 printf("Track deleted.\n");
             }
         }
- 
 
+        if (CMD_IS(line, "media")) {
+            MediaCollection* m = MediaCollection::GetInstance();
+            if (m->GetCount() > 0) {
+                m->ResetIterator();
+                Media* me;
+                printf("%d media objects existent\n", m->GetCount());
+
+                while (me = m->GetNext()) {
+                    printf("%s\n", me->GetName());
+                }
+            } else {
+                printf("No media registered\n");
+            }
+                       
+        }
+
+        static const char* ext[] = {"*"};
+        FileMediaOpener::GetInstance()->RegisterMedia(new AnyMedia{"*"}, 
+            1, ext);
+            
+        if (CMD_IS(line, "media add")) {
+            printf("Path: ");
+
+            char path[256];
+            fgets(path, 256, stdin);
+            CHOMP(path);            
+
+            FileMedia* f = FileMediaOpener::GetInstance()->Open(path, "*");
+            if (!f) {
+                char* strerr;
+                strerr = strerror(errno);
+                printf("\tERROR: Could not open %s: %s\n", path, strerr);
+                continue;
+            }
+
+            printf("Added %s to media collection\n", f->GetName());
+            MediaCollection::GetInstance()->AddMedia(f); 
+            
+        }
+
+ 
     } 
 }

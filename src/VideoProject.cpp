@@ -10,11 +10,13 @@ VideoProject::VideoProject(char* name,
     _defAudioBitrate = bitrate;
 
     _trackcol = new TrackCollection;
+    _mediacol = new MediaCollection;
 }
 
 VideoProject::~VideoProject()
 {
     delete _trackcol;
+    delete _mediacol;
 }
 
 /* Open a project from a file */
@@ -50,5 +52,5 @@ void VideoProject::SetBitrate(int brate) { _defAudioBitrate = brate; }
 
 char* VideoProject::GetFileName() { return _filename; }
 
-
 TrackCollection* VideoProject::GetTracks() { return _trackcol; }
+MediaCollection* VideoProject::GetMedia() { return _mediacol; }
