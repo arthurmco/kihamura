@@ -1,6 +1,19 @@
 *.o
 *.swp
+*.~
+*~
 kihamura
 
-autom4te_cache/
-
+# automake generated
+Makefile
+autom4te.cache
+autom4te.cache/*
+config.h
+config.log
+config.status
+configure
+src/.deps/
+src/Makefile
+src/media/.deps/
+src/media/Makefile
+stamp-h1
