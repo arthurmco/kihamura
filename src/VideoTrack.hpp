@@ -4,6 +4,8 @@
 */
 
 #include "Track.hpp"
+#include "VideoClip.hpp"
+#include <map>
 
 #ifndef _VIDEO_TRACK_HPP
 #define _VIDEO_TRACK_HPP
@@ -18,6 +20,12 @@ private:
 
     /* Track opacity, (0.0 = transparent, 1.0 = opaque) */
     double _opacity;
+
+    /* Video clips in this track */
+    std::map<int /*frame*/, VideoClip*> _clips;
+   
+    std::map<int /*frame*/, VideoClip*>::iterator _it;
+
 public:
     VideoTrack();
 
@@ -29,6 +37,21 @@ public:
     void SetPosition(double x, double y);
     void SetPosition(double x, double y, double z);
 
+    /* Add a video clip in this track, at frame position 'frame' */
+    void AddVideoClip(int frame, VideoClip* clip);
+
+    /* Get the video clip at frame position 'frame' */
+    VideoClip* GetVideoClip(int frame);
+    
+    virtual void ResetIterator();
+
+    /*  Returns the first frame of the clip and 'object' as a pointer to the
+        clip pointer
+
+        If the iterator is over, 'object' pointed value is nullptr and the
+        code returns 1
+     */
+    virtual int GetNextObject(void** object);
 };
 
 #endif

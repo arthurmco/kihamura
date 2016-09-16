@@ -27,16 +27,17 @@ private:
     static MediaCollection* __instance;
 
 public:
-    Media* GetMedia(const char* name);  
+    Media* GetMedia(const char* name); 
+    Media* GetMedia(int index); 
 
     bool AddMedia(Media* m);
     bool RemoveMedia(Media* m);
  
-    /* Copy media between collections.
-       Returns false if there's a media with the same name  */
+    /* Copy media 'm' to collection 'col'.
+       Returns true on success, false on failure */
     bool CopyMedia(MediaCollection* col, Media* m);
 
-    /* Move media between collections */
+    /* Move media 'm' to collection 'col'. */
     bool MoveMedia(MediaCollection* col, Media* m);
  
     size_t GetCount(); 

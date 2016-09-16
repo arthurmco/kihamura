@@ -11,5 +11,6 @@ AM_LDFLAGS=
 bin_PROGRAMS=kihamura
 kihamura_SOURCES=main.cpp MediaCollection.cpp Media.cpp \
  TrackCollection.cpp Track.cpp VideoProject.cpp VideoTrack.cpp \
+ VideoObject.cpp VideoClip.cpp \
  media/AnyMedia.cpp media/FileMedia.cpp media/FileMediaOpener.cpp
 

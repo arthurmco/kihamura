@@ -107,6 +107,7 @@ am__dirstamp = $(am__leading_dot)dirstamp
 am_kihamura_OBJECTS = main.$(OBJEXT) MediaCollection.$(OBJEXT) \
 	Media.$(OBJEXT) TrackCollection.$(OBJEXT) Track.$(OBJEXT) \
 	VideoProject.$(OBJEXT) VideoTrack.$(OBJEXT) \
+	VideoObject.$(OBJEXT) VideoClip.$(OBJEXT) \
 	media/AnyMedia.$(OBJEXT) media/FileMedia.$(OBJEXT) \
 	media/FileMediaOpener.$(OBJEXT)
 kihamura_OBJECTS = $(am_kihamura_OBJECTS)
@@ -266,6 +267,7 @@ AM_CXXFLAGS = -std=c++11
 AM_LDFLAGS = 
 kihamura_SOURCES = main.cpp MediaCollection.cpp Media.cpp \
  TrackCollection.cpp Track.cpp VideoProject.cpp VideoTrack.cpp \
+ VideoObject.cpp VideoClip.cpp \
  media/AnyMedia.cpp media/FileMedia.cpp media/FileMediaOpener.cpp
 
 all: all-am
@@ -371,6 +373,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MediaCollection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Track.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/TrackCollection.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/VideoClip.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/VideoObject.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/VideoProject.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/VideoTrack.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@

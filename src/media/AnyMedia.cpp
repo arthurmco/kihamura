@@ -22,3 +22,20 @@ FileMedia* AnyMedia::Clone()
 {
     return new AnyMedia(*this);
 }
+
+VideoObject* AnyMedia::GetVideoObject(int index)
+{
+    if (index > 0) return nullptr;
+
+    char vname[32];
+    sprintf(vname, "Video #%p", this);
+
+    size_t num = (size_t)this;
+    return new VideoObject{vname, 1280, 720, 30, ((int)num) % 8000,
+      VFORMAT_RGB24};  
+}
+
+int AnyMedia::GetVideoObjectCount()
+{
+    return 1;
+}

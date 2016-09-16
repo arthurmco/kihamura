@@ -35,6 +35,10 @@ public:
 
     unsigned int GetID();
     virtual int GetType();
+
+    virtual void ResetIterator() {}
+    virtual int GetNextObject(void** object) {*object = nullptr; return -1;}
+
 };
 
 

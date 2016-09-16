@@ -46,7 +46,7 @@ int main(int argc, char **argv)
         /* Remove the newline character */
         CHOMP(line);
         
-        if (CMD_IS(line, "info")) {
+        if (CMD_IS(line, "project info")) {
             printf("Project name: '%s'\n", vp->GetName());
             printf("Size: %dx%d, %.2f fps, %.3f kbps of bitrate\n", 
                 vp->GetWidth(), vp->GetHeight(), vp->GetFPS(), 
@@ -224,6 +224,62 @@ int main(int argc, char **argv)
             printf("Added %s to media collection\n", f->GetName());
             MediaCollection::GetInstance()->AddMedia(f); 
             
+        }
+
+        if (CMD_IS(line, "project media")) {
+
+            MediaCollection* m = vp->GetMedia();
+            if (m->GetCount() > 0) {
+                m->ResetIterator();
+                Media* me;
+                printf("%d media objects existent\n", m->GetCount());
+
+                while (me = m->GetNext()) {
+                    printf("%s\n", me->GetName());
+                }
+            } else {
+                printf("No media registered in this project\n");
+            }
+        }
+
+        if (CMD_IS(line, "project media add")) {
+            int index = 0;
+            MediaCollection* m = MediaCollection::GetInstance();
+            if (m->GetCount() > 0) {
+                printf("Choose a media file: \n");
+                m->ResetIterator();
+                Media* me;
+
+                while (me = m->GetNext()) {
+                    printf("%d: %s\n", index++, me->GetName());
+                }
+
+                                
+
+            } else {
+                printf("\tNo media registered. Please use media add to add "
+                        "new media.\n");
+                continue;
+            }
+
+            index = 0;
+            printf("\n Index: ");
+            scanf("%d", &index);
+
+            Media* me = m->GetMedia(index);
+            if (me) {
+                m->CopyMedia(vp->GetMedia(), me);
+                printf("Added %s to project %s\n", me->GetName(), vp->GetName());
+            }
+        
+        }
+
+        if (CMD_IS(line, "tracks media")) {
+
+        }
+
+        if (CMD_IS(line, "tracks media add")) {
+
         }
 
  

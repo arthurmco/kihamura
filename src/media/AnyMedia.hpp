@@ -21,6 +21,9 @@ public:
 
     virtual bool Open() override;
     virtual FileMedia* Clone() override;
+
+    virtual VideoObject* GetVideoObject(int index) override;
+    virtual int GetVideoObjectCount() override;
 };
 
 #endif

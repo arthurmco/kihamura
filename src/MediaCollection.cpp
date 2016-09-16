@@ -12,6 +12,17 @@ Media* MediaCollection::GetMedia(const char* name)
     return nullptr;
 }
 
+Media* MediaCollection::GetMedia(int index)
+{
+
+    if (index >= _medialist.size()) return nullptr;
+
+    auto it = _medialist.begin();
+    std::advance(it, index);
+
+    return *it;
+}
+
 bool MediaCollection::AddMedia(Media* m)
 {
     if (!this->GetMedia(m->GetName())) {
@@ -42,6 +53,8 @@ bool MediaCollection::RemoveMedia(Media* m)
 /* Copy media between collections */
 bool MediaCollection::CopyMedia(MediaCollection* col, Media* m)
 {
+    if (!this->GetMedia(m->GetName())) return false;
+   
     if (!col->GetMedia(m->GetName())) {
         col->_medialist.push_back(m);
         return true;
@@ -55,6 +68,7 @@ bool MediaCollection::MoveMedia(MediaCollection* col, Media* m)
 {
     /* Note that you can't move from the singleton */
     if (MediaCollection::GetInstance() == this) return false;
+    if (!this->GetMedia(m->GetName())) return false;
 
     if (!this->CopyMedia(col, m)) return false;
     this->RemoveMedia(m);

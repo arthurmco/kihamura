@@ -9,7 +9,7 @@
 #ifndef _VIDEOOBJECT_HPP
 #define _VIDEOOBJECT_HPP
 
-typedef VideoRawData uint8_t;
+typedef uint8_t VideoRawData;
 
 enum VideoFormat {
     VFORMAT_RGB24,
@@ -23,7 +23,7 @@ class VideoObject
 {
 private:
     /* Object name */
-    char* _name;
+    std::string _name;
 
     /* Object identificator */
     int _id;
@@ -37,13 +37,37 @@ private:
     std::map<int, VideoRawData*> _keyframes;
 
     /* The video format */
-    int format;
+    int _format;
 
     /* The video framerate */
-    float framerate;
+    float _framerate;
 
-public 
+    /*  The video framecount, 
+        -1 if you want the video to 'never end'.
+        It will be able to increase and decrease the length as you wish, like
+        some imahes
 
-}.
+    */
+    int _framecount;
+
+public:
+    VideoObject(const char* name, int width, int height, float fps, 
+        int framecount, int format);
+
+    const char* GetName() const;
+    void SetName(const char* n);
+
+    int GetID();
+
+    int GetWidth();
+    int GetHeight();
+
+    int GetFormat();
+    float GetFramerate();
+    int GetFramecount();
+
+    /* Interpolate a frame on frame position 'f' */
+    VideoRawData* InterpolateFrame(int f);
+};
 
 #endif
