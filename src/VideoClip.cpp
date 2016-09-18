@@ -1,10 +1,9 @@
 #include "VideoClip.hpp"
 
 VideoClip::VideoClip(VideoObject* obj, int frameStart, int frameLength)
+    : Clip(frameStart, frameLength)
 {
     _obj = obj;
-    _frameStart = frameStart;
-    _frameLength = frameLength;
 }
 
 int VideoClip::GetWidth() const
@@ -13,7 +12,7 @@ int VideoClip::GetWidth() const
 }
 
 void VideoClip::SetWidth(int w)
-{ 
+{
     _width = w;
 }
 
@@ -57,23 +56,4 @@ void VideoClip::SetPositions(double x, double y, double z)
 VideoObject* VideoClip::GetObject()
 {
     return _obj;
-}
-   
-int VideoClip::GetObjectStartPoint() const
-{
-    return _frameStart;
-}
-
-int VideoClip::GetObjectLength() const
-{
-    return _frameLength;
-}
-void VideoClip::SetObjectStartPoint(int frameStart) 
-{
-    _frameStart = frameStart;
-}
-
-void VideoClip::SetObjectLength(int frameLength) 
-{
-    _frameLength = frameLength;
 }

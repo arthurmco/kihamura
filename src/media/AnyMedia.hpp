@@ -1,5 +1,5 @@
 /*  Temporary opener that can open any type of media
-    
+
     Copyright (C) 2016 Arthur M
 */
 
@@ -24,6 +24,9 @@ public:
 
     virtual VideoObject* GetVideoObject(int index) override;
     virtual int GetVideoObjectCount() override;
+    virtual AudioObject* GetAudioObject(int index) override;
+    virtual int GetAudioObjectCount() override;
+
 };
 
 #endif

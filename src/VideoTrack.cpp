@@ -4,7 +4,7 @@
 VideoTrack::VideoTrack() : Track()
 {}
 
-int VideoTrack::GetType() 
+int VideoTrack::GetType()
 {
     return TRACK_VIDEO;
 }
@@ -29,7 +29,7 @@ void VideoTrack::SetPosition(double x, double y, double z)
 }
 
 void VideoTrack::AddVideoClip(int frame, VideoClip* clip)
-{ 
+{
     if (_clips.find(frame) == _clips.end())
         _clips[frame] = clip;
 }
@@ -47,19 +47,20 @@ void VideoTrack::ResetIterator()
     _it = _clips.begin();
 }
 
-int VideoTrack::GetNextObject(void** object)
+/*  Returns the clip pointer, and stores its frame at 'frame'
+
+    Returns nullptr and sets frame to -1 if no more frames.
+ */
+Clip* VideoTrack::GetNextObject(int& frame)
 {
     if (_it == _clips.end()) {
-        *object = nullptr;
-        return -1;
+        frame = -1;
+        return nullptr;
     } else {
-        *object = (void*)(_it->second);
-
+        frame = _it->first;
     }
 
-    int f = _it->first;
-
+    Clip* o = (Clip*)_it->second;
     _it++;
-    return f;
-
+    return o;
 }

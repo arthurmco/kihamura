@@ -1,14 +1,14 @@
 #include "AnyMedia.hpp"
 
-AnyMedia::AnyMedia(const char* path) : 
-    FileMedia(path) 
+AnyMedia::AnyMedia(const char* path) :
+    FileMedia(path)
 {
     static bool registered=false;
 
     if (!registered) {
         static const char* ext[] = {"*"};
         FileMediaOpener::GetInstance()->RegisterMedia(this, 1, ext);
-        registered = true;        
+        registered = true;
     }
 }
 
@@ -32,10 +32,26 @@ VideoObject* AnyMedia::GetVideoObject(int index)
 
     size_t num = (size_t)this;
     return new VideoObject{vname, 1280, 720, 30, ((int)num) % 8000,
-      VFORMAT_RGB24};  
+      VFORMAT_RGB24};
 }
 
 int AnyMedia::GetVideoObjectCount()
+{
+    return 1;
+}
+
+AudioObject* AnyMedia::GetAudioObject(int index)
+{
+    if (index > 0) return nullptr;
+
+    char vname[32];
+    sprintf(vname, "Audio #%p", this);
+
+    size_t num = (size_t)this;
+    return new AudioObject{vname, 2, 44100, ((int)num) % 8000,
+        AUDIO_FORMAT_INT64};
+}
+int AnyMedia::GetAudioObjectCount()
 {
     return 1;
 }

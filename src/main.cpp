@@ -10,6 +10,7 @@
 
 #include "VideoProject.hpp"
 #include "VideoTrack.hpp"
+#include "AudioTrack.hpp"
 
 #include "MediaCollection.hpp"
 
@@ -142,12 +143,13 @@ int main(int argc, char **argv)
             if (strlen(name) <= 2) continue;
             CHOMP(name);
 
-            printf("Track type: [video|other]: ");
+            printf("Track type: [video|audio|other]: ");
             fgets(type, 16, stdin);
             CHOMP(type);
 
             Track* t;
             if (CMD_IS(type, "video"))  t = new VideoTrack{};
+            else if (CMD_IS(type, "audio")) t = new AudioTrack{};
             else if (CMD_IS(type, "other"))  t = new Track{};
             else    continue;
 
@@ -300,27 +302,58 @@ int main(int argc, char **argv)
                 printf(" - Track #%d: %s\n", i, trk->GetName());
                 trk->ResetIterator();
 
-                VideoClip* vc;
-                int frame  = trk->GetNextObject((void**)&vc);
+                int frame;
+                Clip* clip = trk->GetNextObject(frame);
 
-                while (vc) {
-                    printf("\tVideo clip at frame %d\n", frame);
+                while (clip) {
+                    VideoClip* vc = dynamic_cast<VideoClip*>(clip);
+                    AudioClip* ac = dynamic_cast<AudioClip*>(clip);
 
-                    VideoObject* vo = vc->GetObject();
-                    if (!vo) {
-                        printf("WARNING: Video object is null. Weird\n");
-                        frame = trk->GetNextObject((void**)&vc);
-                        continue;
+                    if (vc) {
+                        printf("\tVideo clip at frame %d\n", frame);
+
+                        VideoObject* vo = vc->GetObject();
+                        if (!vo) {
+                            printf("WARNING: Video object is null. Weird\n");
+                            goto next_clip;
+                        }
+
+                        int st = vc->GetObjectStartPoint();
+                        int len = vc->GetObjectLength();
+                        printf("\t\t Video object: %s\n", vo->GetName());
+                        printf("\t\t Object cutted from frames %d-%d\n", st, len);
+                        printf("\t\t Resolution: %dx%d\n", vo->GetWidth(), vo->GetHeight());
+
+                        goto next_clip;
                     }
 
-                    int st = vc->GetObjectStartPoint();
-                    int len = vc->GetObjectLength();
-                    printf("\t\t Video object: %s\n", vo->GetName());
-                    printf("\t\t Object cutted from frames %d-%d\n", st, len);
-                    printf("\t\t Resolution: %dx%d\n", vo->GetWidth(), vo->GetHeight());
+                    if (ac) {
+                        printf("\tAudio clip at frame %d\n", frame);
 
+                        AudioObject* ao = ac->GetObject();
+                        if (!ao) {
+                            printf("WARNING: Audio object is null. Weird\n");
+                            goto next_clip;
+                        }
+
+                        int st = ac->GetObjectStartPoint();
+                        int len = ac->GetObjectLength();
+
+                        long int bitrate = ao->GetBitrate();
+                        long int duration = ao->GetSampleCount();
+
+                        printf("\t\t Audio object: %s\n", ao->GetName());
+                        printf("\t\t Object cutted from frames %d-%d\n", st, len);
+                        printf("\t\t Bitrate: %d bps\n", ao->GetBitrate());
+                        printf("\t\t Duration: %ld seconds\n", duration / bitrate);
+
+                        goto next_clip;
+                    }
+
+                    printf("Unknown clip type at frame %d\n", frame);
+                    next_clip:
                     printf("\n");
-                    frame = trk->GetNextObject((void**)&vc);
+                    clip = trk->GetNextObject(frame);
                 }
 
 
@@ -396,13 +429,24 @@ int main(int argc, char **argv)
 
           VideoTrack* vt = dynamic_cast<VideoTrack*>(tr);
 
-          if (!vt) {
-              continue;
+          if (vt) {
+              VideoObject* obj = me->GetVideoObject(0);
+              vt->AddVideoClip(frame, new VideoClip{obj, frame,
+                obj->GetFramecount() - frame});
+            continue;
           }
 
-          VideoObject* obj = me->GetVideoObject(0);
-          vt->AddVideoClip(frame, new VideoClip{obj, frame,
-            obj->GetFramecount() - frame});
+          AudioTrack* at = dynamic_cast<AudioTrack*>(tr);
+
+          if (at) {
+            AudioObject* obj = me->GetAudioObject(0);
+            long int framecount = (obj->GetSampleCount() / obj->GetBitrate()) * vp->GetFPS();
+            at->AddAudioClip(frame, new AudioClip{obj, frame,
+                 framecount - frame});
+            continue;
+          }
+
+
 
 
         }

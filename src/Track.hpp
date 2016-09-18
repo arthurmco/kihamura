@@ -1,10 +1,12 @@
 /*  Basic default class for tracks on Kihamura
 
-    Copyright (C) 2016 Arthur M 
+    Copyright (C) 2016 Arthur M
 */
 
 #include <cstdlib>
 #include <string>
+
+#include "Clip.hpp"
 
 #ifndef _TRACK_HPP
 #define _TRACK_HPP
@@ -19,7 +21,7 @@ enum TrackType {
     TRACK_UNKNOWN = 0xff
 };
 
-class Track 
+class Track
 {
 private:
     unsigned int _id;
@@ -31,13 +33,13 @@ public:
     Track();
 
     void SetName(char*);
-    const char* GetName() const;    
+    const char* GetName() const;
 
     unsigned int GetID();
     virtual int GetType();
 
     virtual void ResetIterator() {}
-    virtual int GetNextObject(void** object) {*object = nullptr; return -1;}
+    virtual Clip* GetNextObject(int& frame) {frame = 1; return nullptr;}
 
 };
 

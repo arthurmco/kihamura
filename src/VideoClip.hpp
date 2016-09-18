@@ -1,20 +1,21 @@
 /*  Video clip definitions
-    
+
     Copyright (C) 2016 Arthur M
 */
 
 #include "VideoObject.hpp"
+#include "Clip.hpp"
 
 #ifndef _VIDEO_CLIP_HPP
 #define _VIDEO_CLIP_HPP
 
 /*
-    A video clip is a video representation in the tracks.   
+    A video clip is a video representation in the tracks.
     It can be parts of a video file, or the video file itself
 
 */
 
-class VideoClip {
+class VideoClip : public Clip {
 private:
     /* Clip width and height */
     int _width, _height;
@@ -24,9 +25,6 @@ private:
 
     /* Object that this clip is derived from */
     VideoObject* _obj;
-
-    /* Where does this clip starts and ends from that object */
-    int _frameStart, _frameLength;
 
     /* Effects */
     // std::list<VideoEffect*> _effects;
@@ -48,13 +46,7 @@ public:
     void SetPositions(double x, double y);
     void SetPositions(double x, double y, double z);
 
-    VideoObject* GetObject();
-    
-    int GetObjectStartPoint() const;
-    int GetObjectLength() const;
-    void SetObjectStartPoint(int);
-    void SetObjectLength(int);
-    
+    virtual VideoObject* GetObject() override;
 };
 
 #endif

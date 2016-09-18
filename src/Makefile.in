@@ -105,9 +105,10 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_kihamura_OBJECTS = main.$(OBJEXT) MediaCollection.$(OBJEXT) \
-	Media.$(OBJEXT) TrackCollection.$(OBJEXT) Track.$(OBJEXT) \
-	VideoProject.$(OBJEXT) VideoTrack.$(OBJEXT) \
+	Media.$(OBJEXT) Clip.$(OBJEXT) TrackCollection.$(OBJEXT) \
+	Track.$(OBJEXT) VideoProject.$(OBJEXT) VideoTrack.$(OBJEXT) \
 	VideoObject.$(OBJEXT) VideoClip.$(OBJEXT) \
+	AudioObject.$(OBJEXT) AudioClip.$(OBJEXT) AudioTrack.$(OBJEXT) \
 	media/AnyMedia.$(OBJEXT) media/FileMedia.$(OBJEXT) \
 	media/FileMediaOpener.$(OBJEXT)
 kihamura_OBJECTS = $(am_kihamura_OBJECTS)
@@ -265,9 +266,9 @@ AUTOMAKE_OPTIONS = foreign
 #SUBDIRS=media
 AM_CXXFLAGS = -std=c++11
 AM_LDFLAGS = 
-kihamura_SOURCES = main.cpp MediaCollection.cpp Media.cpp \
+kihamura_SOURCES = main.cpp MediaCollection.cpp Media.cpp Clip.cpp \
  TrackCollection.cpp Track.cpp VideoProject.cpp VideoTrack.cpp \
- VideoObject.cpp VideoClip.cpp \
+ VideoObject.cpp VideoClip.cpp AudioObject.cpp AudioClip.cpp AudioTrack.cpp \
  media/AnyMedia.cpp media/FileMedia.cpp media/FileMediaOpener.cpp
 
 all: all-am
@@ -369,6 +370,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AudioClip.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AudioObject.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/AudioTrack.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Clip.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Media.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/MediaCollection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Track.Po@am__quote@

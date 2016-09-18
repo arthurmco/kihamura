@@ -6,7 +6,7 @@
 
 #include <string>
 #include "VideoObject.hpp"
-
+#include "AudioObject.hpp"
 
 #ifndef _MEDIA_HPP
 #define _MEDIA_HPP
@@ -18,17 +18,17 @@ private:
 
 public:
     Media(const char* name);
-    
+
     const char* GetName() const;
     void SetName(char*);
 
 
     virtual VideoObject* GetVideoObject(int index) = 0;
-/*  AudioObject* GetAudioObject(int index);
-*/
+    virtual AudioObject* GetAudioObject(int index) = 0;
+
 
     virtual int GetVideoObjectCount() = 0;
-    int GetAudioObjectCount();
+    virtual int GetAudioObjectCount() = 0;
 
 };
 
