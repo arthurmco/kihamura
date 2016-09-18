@@ -17,3 +17,9 @@ src/Makefile
 src/media/.deps/
 src/media/Makefile
 stamp-h1
+
+# Automake generated files
+compile
+depcomp
+install-sh
+missing
