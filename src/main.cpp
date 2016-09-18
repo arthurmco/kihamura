@@ -26,6 +26,7 @@
         if(__z) *__z = 0;               \
     } while (0);
 
+int gui_main(int argc, char** argv);
 
 int main(int argc, char **argv)
 {
@@ -46,6 +47,10 @@ int main(int argc, char **argv)
 
         /* Remove the newline character */
         CHOMP(line);
+
+        if (CMD_IS(line, "gui")) {
+            return gui_main(argc, argv);
+        }
 
         if (CMD_IS(line, "project info")) {
             printf("Project name: '%s'\n", vp->GetName());
@@ -453,4 +458,12 @@ int main(int argc, char **argv)
 
 
     }
+}
+
+extern "C" {
+    #include <gtk/gtk.h>
+}
+int gui_main(int argc, char** argv)
+{
+
 }

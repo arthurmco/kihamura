@@ -18,6 +18,9 @@ src/media/.deps/
 src/media/Makefile
 stamp-h1
 
+*Makefile.in
+Makefile.in
+
 # Automake generated files
 compile
 depcomp
