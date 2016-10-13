@@ -4,4 +4,3 @@
 
 AUTOMAKE_OPTIONS = foreign   # we're not GNU/Kihamura
 SUBDIRS = src #doc examples man scripts
-

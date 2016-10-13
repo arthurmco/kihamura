@@ -23,4 +23,7 @@ AC_TYPE_UINT8_T
 # Checks for library functions.
 AC_CHECK_FUNCS([strerror strrchr])
 
+# Check for some other libraries
+PKG_CHECK_MODULES([GTK3], [gtk+-3.0 > 3.10])
+
 AC_OUTPUT([Makefile src/Makefile src/media/Makefile])

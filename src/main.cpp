@@ -460,9 +460,11 @@ int main(int argc, char **argv)
     }
 }
 
+
 extern "C" {
     #include <gtk/gtk.h>
 }
+
 int gui_main(int argc, char** argv)
 {
 
