@@ -17,6 +17,8 @@
 #include "media/FileMediaOpener.hpp"
 #include "media/AnyMedia.hpp"
 
+#include "gui-main.hpp"
+
 #define CMD_IS(line, cmd) \
     (!strcmp(line, cmd))
 
@@ -25,8 +27,6 @@
         char* __z = strrchr(s, '\n');   \
         if(__z) *__z = 0;               \
     } while (0);
-
-int gui_main(int argc, char** argv);
 
 int main(int argc, char **argv)
 {
@@ -458,14 +458,4 @@ int main(int argc, char **argv)
 
 
     }
-}
-
-
-extern "C" {
-    #include <gtk/gtk.h>
-}
-
-int gui_main(int argc, char** argv)
-{
-
 }

@@ -26,4 +26,7 @@ AC_CHECK_FUNCS([strerror strrchr])
 # Check for some other libraries
 PKG_CHECK_MODULES([GTK3], [gtk+-3.0 > 3.10])
 
+# Defines
+AC_DEFINE_UNQUOTED([DATAPATH], ["$pkgdatadir"], [Data directory path])
+
 AC_OUTPUT([Makefile src/Makefile src/media/Makefile])
