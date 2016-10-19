@@ -30,4 +30,14 @@ int gui_main(int argc, char** argv)
 static int gui_app_activate(GtkApplication* app, gpointer data)
 {
     widgets.builder = gtk_builder_new_from_file(GladeIFaceFile);
+
+    widgets.winMain = GTK_WIDGET(gtk_builder_get_object(widgets.builder, "winMain"));
+    g_signal_connect (widgets.winMain, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+
+    gtk_application_add_window(app, GTK_WINDOW(widgets.winMain));
+
+    gtk_window_maximize(GTK_WINDOW(widgets.winMain));
+    gtk_widget_show_all(widgets.winMain);
+
+    gtk_main();
 }
