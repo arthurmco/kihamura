@@ -2,6 +2,7 @@
 *.swp
 *.~
 *~
+*.pch
 kihamura
 
 # automake generated
