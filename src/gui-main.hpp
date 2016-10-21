@@ -6,6 +6,8 @@
 #ifndef _GUI_MAIN_HPP
 #define _GUI_MAIN_HPP
 
+#include <functional>
+
 #include "VideoProject.hpp"
 #include "media/AnyMedia.hpp"
 

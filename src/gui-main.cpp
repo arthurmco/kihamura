@@ -40,6 +40,19 @@ int gui_main(int argc, char** argv)
     return 0;
 }
 
+static int gui_show_about_dialog(GtkMenuItem* mni, gpointer user_data)
+{
+    static const char* authors[] =
+        {"Arthur Mendes <arthurmco@gmail.com>"};
+    gtk_show_about_dialog(GTK_WINDOW(widgets.winMain),
+        "program-name", "Kihamura",
+        "comments", "an video editor designed to be easy to use",
+        "version", "0.0.1",
+        "authors", authors,
+        "website", "http://github.com/arthurmco/kihamura",
+        "website-label", "Github repo", NULL);
+}
+
 static int gui_app_activate(GtkApplication* app, gpointer data)
 {
     /* Connect controls to events, then launch */
@@ -53,6 +66,11 @@ static int gui_app_activate(GtkApplication* app, gpointer data)
         widgets.builder, "mniInsertMedia"));
     g_signal_connect(mniInsertMedia, "activate",
         G_CALLBACK(gui_show_open_media_dialog), NULL);
+
+    GtkWidget* mniAbout = GTK_WIDGET(gtk_builder_get_object(
+            widgets.builder, "mniAbout"));
+    g_signal_connect(mniAbout, "activate",
+            G_CALLBACK(gui_show_about_dialog), NULL);
 
     gtk_application_add_window(app, GTK_WINDOW(widgets.winMain));
 
