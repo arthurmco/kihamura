@@ -46,7 +46,7 @@ static int gui_show_about_dialog(GtkMenuItem* mni, gpointer user_data)
         {"Arthur Mendes <arthurmco@gmail.com>"};
     gtk_show_about_dialog(GTK_WINDOW(widgets.winMain),
         "program-name", "Kihamura",
-        "comments", "an video editor designed to be easy to use",
+        "comments", "a video editor designed to be easy to use",
         "version", "0.0.1",
         "authors", authors,
         "website", "http://github.com/arthurmco/kihamura",
