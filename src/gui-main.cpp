@@ -15,6 +15,7 @@ static int gui_app_activate(GtkApplication* app, gpointer data);
 static void gui_setup_media_list();
 
 static int gui_show_open_media_dialog(GtkMenuItem* mni, gpointer user_data);
+static int gui_exit(GtkMenuItem* mni, gpointer user_data);
 static int gui_insert_media(GSList* fileList);
 
 static char const* GladeIFaceFile = DATA_DIR "/kihamura/interface.glade";
@@ -72,6 +73,11 @@ static int gui_app_activate(GtkApplication* app, gpointer data)
     g_signal_connect(mniAbout, "activate",
             G_CALLBACK(gui_show_about_dialog), NULL);
 
+    GtkWidget* mniExit = GTK_WIDGET(gtk_builder_get_object(
+            widgets.builder, "mniExit"));
+    g_signal_connect(mniExit, "activate",
+            G_CALLBACK(gui_exit), NULL);
+
     gtk_application_add_window(app, GTK_WINDOW(widgets.winMain));
 
     gtk_window_maximize(GTK_WINDOW(widgets.winMain));
@@ -97,6 +103,12 @@ static void gui_setup_media_list()
     GtkTreeViewColumn* colMediaName = gtk_tree_view_column_new_with_attributes(
         "Title", crMediaName, "text", TMC_MEDIANAME, NULL);
     gtk_tree_view_append_column (GTK_TREE_VIEW (treeMedia), colMediaName);
+}
+
+static int gui_exit(GtkMenuItem* mni, gpointer user_data)
+{
+    gtk_main_quit();
+    exit(0);
 }
 
 static int gui_show_open_media_dialog(GtkMenuItem* mni, gpointer user_data)

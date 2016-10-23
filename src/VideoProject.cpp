@@ -1,9 +1,9 @@
 #include "VideoProject.hpp"
 
-VideoProject::VideoProject(char* name, 
+VideoProject::VideoProject(char* name,
     int width, int height, float fps, int bitrate)
 {
-    _name = name;
+    _name = std::string{name};
     _defWidth = width;
     _defHeight = height;
     _defFramerate = fps;
@@ -35,9 +35,9 @@ void VideoProject::Save(const char* filename)
 {
 
 }
-    
-char* VideoProject::GetName() { return _name; }
-void VideoProject::SetName(char* name) { _name = name; }
+
+char* VideoProject::GetName() { return _name.c_str(); }
+void VideoProject::SetName(char* name) { _name = std::string{name}; }
 
 int VideoProject::GetWidth() { return _defWidth; }
 int VideoProject::GetHeight() { return _defHeight; }

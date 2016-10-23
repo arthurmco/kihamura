@@ -7,6 +7,7 @@
 #define _GUI_MAIN_HPP
 
 #include <functional>
+#include <cstdlib>
 
 #include "VideoProject.hpp"
 #include "media/AnyMedia.hpp"

@@ -4,6 +4,7 @@
 
 */
 
+#include <string>
 #include "TrackCollection.hpp"
 #include "MediaCollection.hpp"
 
@@ -14,9 +15,9 @@ class VideoProject
 {
 private:
     /* The project name */
-    char* _name;
+    std::string _name;
 
-    /* The project default size */    
+    /* The project default size */
     int _defWidth, _defHeight;
 
     /* Project default video framerate and audio bitrate in kbps */
@@ -43,7 +44,7 @@ public:
     /* Save the project */
     void Save();
     void Save(const char* filename);
-    
+
     char* GetName();
     void SetName(char* name);
 
@@ -60,8 +61,8 @@ public:
 
     char* GetFileName();
 
-    TrackCollection* GetTracks();  
-    MediaCollection* GetMedia(); 
+    TrackCollection* GetTracks();
+    MediaCollection* GetMedia();
 };
 
 

@@ -7,6 +7,13 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-missing-image</property>
   </object>
+  <object class="GtkListStore" id="liststore2"/>
+  <object class="GtkListStore" id="lsMedia">
+    <columns>
+      <!-- column-name colname -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="winMain">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Kihamura Video Editor</property>
@@ -318,6 +325,20 @@
           </packing>
         </child>
         <child>
+          <object class="GtkViewport" id="viewport1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkStatusbar" id="statusbar1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -333,17 +354,10 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">3</property>
+            <property name="position">4</property>
           </packing>
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="liststore2"/>
-  <object class="GtkListStore" id="lsMedia">
-    <columns>
-      <!-- column-name colname -->
-      <column type="gchararray"/>
-    </columns>
   </object>
 </interface>
