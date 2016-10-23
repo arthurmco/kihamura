@@ -45,7 +45,7 @@ public:
     void Save();
     void Save(const char* filename);
 
-    char* GetName();
+    const char* GetName() const;
     void SetName(char* name);
 
     int GetWidth();

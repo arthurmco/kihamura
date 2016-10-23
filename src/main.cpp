@@ -30,12 +30,25 @@
 
 int main(int argc, char **argv)
 {
-    VideoProject* vp = new VideoProject{"Test", 720, 480, 29.97f, 192000};
-    printf("Project %s created\n", vp->GetName());
-    printf("Size: %dx%d, %.2f fps, %.3f kbps of bitrate\n",
-        vp->GetWidth(), vp->GetHeight(), vp->GetFPS(),
-        vp->GetBitrate() / 1000.0f);
+    VideoProject* vp = nullptr;
+    char na[128];
+    int w, h, fps;
+    int bitrate;
 
+    printf("Please create a new project. \n");
+    printf("Name: ");
+
+    fgets(na, 128, stdin);
+    CHOMP(na);
+
+    printf("Size of %s [w h]:", na);
+    scanf("%d %d", &w, &h);
+
+    printf("Framerate of %s: ", na);
+    scanf("%d", &fps);
+
+    /* Use 128kbps */
+    vp = new VideoProject{na, w, h, fps, 128000};
 
     bool exit=false;
     /* Temporary shell to configure projects */

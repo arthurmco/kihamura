@@ -36,7 +36,7 @@ void VideoProject::Save(const char* filename)
 
 }
 
-char* VideoProject::GetName() { return _name.c_str(); }
+const char* VideoProject::GetName() const { return _name.c_str(); }
 void VideoProject::SetName(char* name) { _name = std::string{name}; }
 
 int VideoProject::GetWidth() { return _defWidth; }
