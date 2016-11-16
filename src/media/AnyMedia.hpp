@@ -27,6 +27,16 @@ public:
     virtual AudioObject* GetAudioObject(int index) override;
     virtual int GetAudioObjectCount() override;
 
+    /*  Get only a small part of the video.
+        Returns the object or throws a MediaNotReadyException
+
+        TODO: implement MediaNotReadyException.
+    */
+    virtual VideoObject* GetVideoObject(VideoObject* obj, long long int start,
+        long long int framecount)  override;
+    virtual AudioObject* GetAudioObject(VideoObject* obj, long long int start,
+        long long int samplecount)  override;
+
 };
 
 #endif

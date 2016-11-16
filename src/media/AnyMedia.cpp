@@ -51,6 +51,23 @@ AudioObject* AnyMedia::GetAudioObject(int index)
     return new AudioObject{vname, 2, 44100, ((int)num) % 8000,
         AUDIO_FORMAT_INT64};
 }
+
+/*  Get only a small part of the video.
+    Returns the object or throws a MediaNotReadyException
+
+    TODO: implement MediaNotReadyException.
+*/
+VideoObject* GetVideoObject(VideoObject* obj, long long int start,
+    long long int framecount)
+    {
+        return obj;
+    }
+AudioObject* GetAudioObject(VideoObject* obj, long long int start,
+    long long int samplecount)
+    {
+        return obj;
+    }
+
 int AnyMedia::GetAudioObjectCount()
 {
     return 1;

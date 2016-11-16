@@ -47,6 +47,11 @@ public:
     void SetPositions(double x, double y, double z);
 
     virtual VideoObject* GetObject() override;
+
+    /*  Returns the clip data at a certain time, in clip space
+        In this case, returns the video frame data.
+    */
+    virtual void* GetObjectDataAtTime(int milissecond) override;
 };
 
 #endif

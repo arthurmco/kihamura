@@ -52,8 +52,20 @@ void VideoClip::SetPositions(double x, double y, double z)
     _z = z;
 }
 
-
 VideoObject* VideoClip::GetObject()
 {
     return _obj;
+}
+
+/*  Returns the clip data at a certain time, in clip space
+    In this case, returns the video frame data.
+*/
+VideoRawData* VideoClip::GetObjectDataAtTime(int milissecond)
+{
+    float fps = _obj->GetFramerate();
+    int frame = (milissecond * fps) / 1000;
+
+    if (frame > frameLength) return nullptr;
+
+    return _obj->GetFrame(_frameStart + frame);
 }

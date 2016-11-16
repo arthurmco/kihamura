@@ -1,10 +1,10 @@
 #include "VideoObject.hpp"
 
-VideoObject::VideoObject(const char* name, int width, int height, float fps, 
+VideoObject::VideoObject(const char* name, int width, int height, float fps,
    int framecount, int format)
 {
     _name = std::string{name};
-    
+
     _id = ((int) (((size_t)this) & 0xffffffff));
     _width = width;
     _height = height;
@@ -54,8 +54,17 @@ int VideoObject::GetFramecount()
     return _framecount;
 }
 
-/* Interpolate a frame on frame position 'f' */
-VideoRawData* VideoObject::InterpolateFrame(int f)
+/* Gets a frame on frame position 'f' */
+VideoRawData* VideoObject::GetFrame(int f)
 {
+    return nullptr;
+}
+
+/* Interpolate a frame on a certain time, in the object space.
+    Gets the absolute milissecond */
+VideoRawData* InterpolateFrame(int milissecond)
+{
+    float frame = (milissecond * _framerate) / 1000;
+
     return nullptr;
 }

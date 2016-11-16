@@ -22,9 +22,9 @@ private:
     double _opacity;
 
     /* Video clips in this track */
-    std::map<int /*frame*/, VideoClip*> _clips;
+    std::map<int /*ms*/, VideoClip*> _clips;
 
-    std::map<int /*frame*/, VideoClip*>::iterator _it;
+    std::map<int /*ms*/, VideoClip*>::iterator _it;
 
 public:
     VideoTrack();
@@ -37,11 +37,15 @@ public:
     void SetPosition(double x, double y);
     void SetPosition(double x, double y, double z);
 
-    /* Add a video clip in this track, at frame position 'frame' */
-    void AddVideoClip(int frame, VideoClip* clip);
+    /* Add a video clip in this track, at milissecond 'ms' position */
+    void AddVideoClip(int ms, VideoClip* clip);
 
-    /* Get the video clip at frame position 'frame' */
-    VideoClip* GetVideoClip(int frame);
+    /* Get the video clip at milissecond time 'ms'*/
+    VideoClip* GetVideoClip(int ms);
+
+    /* Get the video frame that can be seen on this track at milisecond time
+        'ms' */
+    VideoObject* GetVideoObject(int ms);
 
     virtual void ResetIterator();
 

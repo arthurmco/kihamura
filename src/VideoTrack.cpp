@@ -28,18 +28,27 @@ void VideoTrack::SetPosition(double x, double y, double z)
     _xPos = x;     _yPos = y;      _zPos = z;
 }
 
-void VideoTrack::AddVideoClip(int frame, VideoClip* clip)
+void VideoTrack::AddVideoClip(int ms, VideoClip* clip)
 {
-    if (_clips.find(frame) == _clips.end())
+    if (_clips.find(ms) == _clips.end())
         _clips[frame] = clip;
 }
 
-VideoClip* VideoTrack::GetVideoClip(int frame)
+VideoClip* VideoTrack::GetVideoClip(int ms)
 {
-    if (_clips.find(frame) == _clips.end())
+    if (_clips.find(ms) == _clips.end())
         return nullptr;
     else
-        return _clips[frame];
+        return _clips[ms];
+}
+
+/* Get the video frame that can be seen on this track at milisecond time
+    'ms' */
+VideoObject* GetVideoObject(int ms)
+{
+    VideoClip* c = this->GetVideoClip(ms);
+
+    return nullptr;
 }
 
 void VideoTrack::ResetIterator()

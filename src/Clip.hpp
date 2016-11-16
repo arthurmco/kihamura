@@ -22,6 +22,9 @@ public:
     void SetObjectLength(int);
 
     virtual void* GetObject() = 0;
+
+    /* Returns the clip data at a certain time, in clip space */
+    virtual void* GetObjectDataAtTime(int milissecond);
 };
 
 
